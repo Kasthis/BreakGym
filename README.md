@@ -1,20 +1,17 @@
-Here is a `README.md` file tailored for your GitHub repository based on the provided Jupyter Notebook. 
 
----
-
-# Deep Q-Network (DQN) for Atari Breakout 🕹️
+# Deep Q-Network (DQN) for Atari Breakout
 
 This repository contains an implementation of a Deep Q-Network (DQN) to play the classic Atari Breakout game using OpenAI's `gym`. The algorithm relies on approximate Q-learning, leveraging experience replay and target networks to stabilize training. 
 
 This code was originally developed as part of the **Practical Reinforcement Learning** course on Coursera.
 
-## 🚀 Overview
+## Overview
 
 The agent learns to play Breakout directly from raw pixel inputs. Instead of manually extracting features, a Convolutional Neural Network (CNN) maps the visual state of the game to optimal Q-values for each possible action. 
 
 The project includes video monitoring capabilities to export and evaluate the agent's gameplay over time.
 
-## 🧠 Core Architecture
+## Core Architecture
 
 This implementation utilizes several standard techniques to make Deep Reinforcement Learning stable and efficient:
 
@@ -47,20 +44,20 @@ Where:
 
 If you are running this on a headless server, you will also need `xvfb` to render the environment frames.
 
-## 📈 Training Details
+## Training Details
 
 * **Exploration vs. Exploitation:** The agent uses an $\epsilon$-greedy strategy. Epsilon starts at `1.0` (pure exploration) and decays by a factor of `0.999` every 500 steps, capping at a minimum of `0.01`.
 * **Optimizer:** Adam Optimizer with a learning rate of `1e-5`.
 * **Warm-up:** The first few thousand steps are required to fill the replay buffer and allow the agent to "warm up" before noticeable improvements in the mean reward occur.
 * **Patience:** Training RL from raw pixels takes a significant amount of time. An optimistic estimate is reaching an average reward $> 10$ after roughly 10,000 to 20,000 training steps.
 
-## 📊 Monitoring Progress
+## Monitoring Progress
 
 During training, the script outputs live charts displaying:
 1. **Mean Reward per Game:** Expected to oscillate heavily but trend upward over thousands of iterations.
 2. **TD Loss History (Moving Average):** The Mean Squared Error between current and target Q-values. It is normal for this to slowly increase or decrease, as long as it does not drop immediately to exactly zero or explode to `NaN`.
 
-## 🎬 Evaluating and Recording
+## Evaluating and Recording
 
 To evaluate a trained agent, you can set `agent.epsilon = 0` to disable random exploration and rely entirely on the learned policy. The repository includes code to record the agent's gameplay using `gym.wrappers.Monitor`.
 
